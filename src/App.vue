@@ -38,6 +38,9 @@ const items = ref([
 const stockQuantityComputed = computed(() => {
   return items.value.filter((item) => item.soldOut === false).length;
 });
+const getDateComputed = computed(function () {
+  return Date.now();
+});
 
 /**
  * 価格を3桁ごとのカンマ付きで返す
@@ -61,6 +64,13 @@ function stockQuantity() {
 function stockItem(item) {
   item.soldOut = false;
 }
+
+/**
+ * 現在時刻を返す
+ */
+function getDate() {
+  return Date.now();
+}
 </script>
 
 <template>
@@ -69,6 +79,8 @@ function stockItem(item) {
     <h1>Vue.js ハンズオン</h1>
   </header>
   <div>商品数: {{ stockQuantityComputed }}</div>
+  <div>現在時刻: {{ getDate() }}</div>
+  <div>現在時刻(computed)：{{ getDateComputed }}</div>
   <main class="main">
     <template v-for="item in items" :key="item.id">
       <div v-if="!item.soldOut" class="item">
