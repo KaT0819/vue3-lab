@@ -41,7 +41,22 @@ const items = ref([
  */
 function pricePrefix(price) {
   return price.toLocaleString();
-};
+}
+
+/**
+ * 在庫のある商品数を返す
+ */
+function stockQuantity() {
+  return items.value.filter((item) => item.soldOut === false).length;
+}
+
+/**
+ * 商品の在庫状況を変更する
+ * @param {object} item 商品情報
+ */
+function stockItem(item) {
+  item.soldOut = false;
+}
 </script>
 
 <template>
@@ -64,6 +79,7 @@ function pricePrefix(price) {
           >
         </div>
       </div>
+      <div v-else> 売り切れです<button type="button" @click="stockItem(item)">入荷</button> </div>
     </template>
   </main>
 </template>
