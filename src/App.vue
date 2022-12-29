@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 const items = ref([
   {
     id: 1,
@@ -35,6 +35,10 @@ const items = ref([
   },
 ]);
 
+const stockQuantityComputed = computed(() => {
+  return items.value.filter((item) => item.soldOut === false).length;
+});
+
 /**
  * 価格を3桁ごとのカンマ付きで返す
  * @param {number} price 価格
@@ -64,7 +68,7 @@ function stockItem(item) {
     <img alt="" class="logo" src="/images/logo.svg" />
     <h1>Vue.js ハンズオン</h1>
   </header>
-
+  <div>商品数: {{ stockQuantityComputed }}</div>
   <main class="main">
     <template v-for="item in items" :key="item.id">
       <div v-if="!item.soldOut" class="item">
