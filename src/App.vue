@@ -87,7 +87,14 @@ function getDate() {
   <div>現在時刻(computed)：{{ getDateComputed }}</div>
   <main class="main">
     <template v-for="item in items" :key="item.id">
-      <div v-if="!item.soldOut" class="item" :class="{ selectedItem: item.selected }" @click="item.selected = !item.selected">
+      <div
+        v-if="!item.soldOut"
+        class="item"
+        :class="{ selectedItem: item.selected }"
+        @click="item.selected = !item.selected"
+        @keyup.enter="item.selected = !item.selected"
+        tabindex="0"
+      >
         <div class="thumnail">
           <img :src="item.image" alt="" />
         </div>
