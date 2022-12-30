@@ -68,6 +68,11 @@ function stockItem(item) {
 function getDate() {
   return Date.now();
 }
+
+function changeSoldOut(id) {
+  const pickElm = items.value.find((item) => item.id === id);
+  pickElm.soldOut = true;
+}
 </script>
 
 <template>
@@ -88,7 +93,14 @@ function getDate() {
         @keyup.enter="item.selected = !item.selected"
         tabindex="0"
       >
-        <Card :name="item.name" :description="item.description" :price="item.price" :image="item.image" />
+        <Card
+          :id="item.id"
+          :name="item.name"
+          :description="item.description"
+          :price="item.price"
+          :image="item.image"
+          @sold-out="changeSoldOut"
+        />
       </div>
       <div v-else> 売り切れです<button type="button" @click="stockItem(item)">入荷</button> </div>
     </template>
